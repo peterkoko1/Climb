@@ -2,17 +2,48 @@ import java.io.Serializable;
 import java.util.*;
 import java.util.stream.Collectors;
 
+/**
+ * The type Decision tree.
+ */
 public class DecisionTree implements Serializable {
+    /**
+     * The Root.
+     */
     Node root;
 
+    /**
+     * The type Node.
+     */
     static class Node implements Serializable {
+        /**
+         * The Is leaf.
+         */
         boolean isLeaf;
+        /**
+         * The Difficulty.
+         */
         int difficulty;
+        /**
+         * The Splitting hold.
+         */
         String splittingHold; // Hold used for splitting at this node
+        /**
+         * The Left.
+         */
         Node left;
+        /**
+         * The Right.
+         */
         Node right;
 
-        // Constructor with splittingHold as a String
+        /**
+         * Instantiates a new Node.
+         *
+         * @param isLeaf        the is leaf
+         * @param difficulty    the difficulty
+         * @param splittingHold the splitting hold
+         */
+// Constructor with splittingHold as a String
         Node(boolean isLeaf, int difficulty, String splittingHold) {
             this.isLeaf = isLeaf;
             this.difficulty = difficulty;
@@ -22,6 +53,12 @@ public class DecisionTree implements Serializable {
         }
     }
 
+    /**
+     * Build tree.
+     *
+     * @param data     the data
+     * @param maxDepth the max depth
+     */
     void buildTree(List<ClimbingFrame> data, int maxDepth) {
         this.root = buildTreeRecursive(data, maxDepth);
     }
@@ -101,6 +138,13 @@ public class DecisionTree implements Serializable {
 
         return new SplitInfo(bestUniqueHolds);
     }
+
+    /**
+     * Predict int.
+     *
+     * @param frame the frame
+     * @return the int
+     */
     int predict(ClimbingFrame frame) {
         Node currentNode = root;
         while (!currentNode.isLeaf) {

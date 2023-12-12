@@ -6,8 +6,16 @@ import java.io.Reader;
 import java.io.Serializable;
 import java.util.*;
 
+/**
+ * The type Data preprocessor.
+ */
 public class DataPreprocessor implements Serializable {
 
+    /**
+     * The entry point of application.
+     *
+     * @param args the input arguments
+     */
     public static void main(String[] args) {
         try {
             String defaultFilePath = "C:\\Users\\pkoko\\IdeaProjects\\Climb\\src\\climbing_data.csv";
@@ -19,6 +27,13 @@ public class DataPreprocessor implements Serializable {
         }
     }
 
+    /**
+     * Preprocess data list.
+     *
+     * @param filePath the file path
+     * @return the list
+     * @throws Exception the exception
+     */
     public static List<ClimbingFrame> preprocessData(String filePath) throws Exception {
         List<ClimbingFrame> climbingFrames = new ArrayList<>();
         Reader in = new FileReader(filePath);
@@ -45,6 +60,13 @@ public class DataPreprocessor implements Serializable {
 
         return frameSet;
     }
+
+    /**
+     * String to climbing frame climbing frame.
+     *
+     * @param frameString the frame string
+     * @return the climbing frame
+     */
     public static ClimbingFrame stringToClimbingFrame(String frameString) {
         Set<String> frameSet = processFrames(frameString);
         // Additional logic to extract the difficulty or other attributes if needed

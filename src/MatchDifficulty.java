@@ -2,7 +2,6 @@ import org.apache.commons.csv.CSVFormat;
 import org.apache.commons.csv.CSVParser;
 import org.apache.commons.csv.CSVRecord;
 
-import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.Reader;
@@ -10,9 +9,22 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
+/**
+ * The type Match difficulty.
+ */
 public class MatchDifficulty {
+    /**
+     * The Cotd.
+     */
     String cotd;
 
+    /**
+     * Instantiates a new Match difficulty.
+     *
+     * @param filepath         the filepath
+     * @param targetDifficulty the target difficulty
+     * @throws IOException the io exception
+     */
     public MatchDifficulty(String filepath, int targetDifficulty) throws IOException {
         List<String> matchingFrames = new ArrayList<>();
         Reader in = new FileReader(filepath);
@@ -30,6 +42,12 @@ public class MatchDifficulty {
         Random random = new Random();
         cotd = matchingFrames.get(random.nextInt(matchingFrames.size()));
     }
+
+    /**
+     * Get cotd string.
+     *
+     * @return the string
+     */
     public String getCotd(){
         return cotd;
     }

@@ -1,12 +1,22 @@
 import java.io.*;
 import java.util.*;
 
+/**
+ * The type Random forest.
+ */
 public class RandomForest implements Serializable {
     private List<DecisionTree> trees;
-    private int numTrees;
-    private int maxDepth;
-    private int maxFeatures;
+    public int numTrees;
+    public int maxDepth;
+    public int maxFeatures;
 
+    /**
+     * Instantiates a new Random forest.
+     *
+     * @param numTrees    the num trees
+     * @param maxDepth    the max depth
+     * @param maxFeatures the max features
+     */
     public RandomForest(int numTrees, int maxDepth, int maxFeatures) {
         this.numTrees = numTrees;
         this.maxDepth = maxDepth;
@@ -14,6 +24,11 @@ public class RandomForest implements Serializable {
         this.trees = new ArrayList<>();
     }
 
+    /**
+     * Train.
+     *
+     * @param data the data
+     */
     public void train(List<ClimbingFrame> data) {
         for (int i = 0; i < numTrees; i++) {
             List<ClimbingFrame> bootstrapSample = bootstrapSample(data);
@@ -23,6 +38,12 @@ public class RandomForest implements Serializable {
         }
     }
 
+    /**
+     * Predict int.
+     *
+     * @param frame the frame
+     * @return the int
+     */
     public int predict(ClimbingFrame frame) {
         Map<Integer, Integer> votes = new HashMap<>();
         for (DecisionTree tree : trees) {
@@ -32,11 +53,23 @@ public class RandomForest implements Serializable {
         return Collections.max(votes.entrySet(), Map.Entry.comparingByValue()).getKey();
     }
 
+    /**
+     * Predict from string int.
+     *
+     * @param frameString the frame string
+     * @return the int
+     */
     public int predictFromString(String frameString) {
         ClimbingFrame frame = DataPreprocessor.stringToClimbingFrame(frameString);
         return predict(frame);
     }
 
+    /**
+     * Save model.
+     *
+     * @param filePath the file path
+     * @throws IOException the io exception
+     */
     public void saveModel(String filePath) throws IOException {
         FileOutputStream fileOutputStream = new FileOutputStream(filePath);
         ObjectOutputStream objectOutputStream = new ObjectOutputStream(fileOutputStream);
@@ -44,6 +77,15 @@ public class RandomForest implements Serializable {
         objectOutputStream.close();
         fileOutputStream.close();
     }
+
+    /**
+     * Load model random forest.
+     *
+     * @param filePath the file path
+     * @return the random forest
+     * @throws IOException            the io exception
+     * @throws ClassNotFoundException the class not found exception
+     */
     public static RandomForest loadModel(String filePath) throws IOException, ClassNotFoundException {
         FileInputStream fileInputStream = new FileInputStream(filePath);
         ObjectInputStream objectInputStream = new ObjectInputStream(fileInputStream);

@@ -1,7 +1,16 @@
 import java.util.*;
 
+/**
+ * The type Feature transformer.
+ */
 public class FeatureTransformer {
 
+    /**
+     * Transform features double [ ] [ ].
+     *
+     * @param featureList the feature list
+     * @return the double [ ] [ ]
+     */
     public static double[][] transformFeatures(List<Map<String, Integer>> featureList) {
         Set<String> uniqueHolds = new HashSet<>();
         for (Map<String, Integer> climb : featureList) {

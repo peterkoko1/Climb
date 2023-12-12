@@ -8,7 +8,6 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
-import java.util.Random;
 
 /**
  * The type Board.
@@ -16,7 +15,7 @@ import java.util.Random;
 public class Board extends JFrame{
     private static final int ROWS = 20;
     private static final int COLS = 16;
-    private Map<Point, Color> gridColors;
+    public Map<Point, Color> gridColors;
     private Color firstColor;
     private Color lastUniqueColor;
     private Point currentStartPoint;
@@ -35,7 +34,7 @@ public class Board extends JFrame{
         initializeUI();
     }
 
-    private void initializeUI() {
+    public void initializeUI() {
         setTitle("Climb! Board");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setSize(600, 500);
@@ -139,7 +138,7 @@ public class Board extends JFrame{
             }
         }
     }
-    private class CellClickListener extends MouseAdapter {
+    public class CellClickListener extends MouseAdapter {
         @Override
         public void mouseClicked(MouseEvent e) {
             CellPanel clickedCell = (CellPanel) e.getComponent();
